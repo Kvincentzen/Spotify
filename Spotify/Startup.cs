@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Spotify.DAL;
 
 namespace Spotify
 {
@@ -30,6 +32,8 @@ namespace Spotify
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            var connectionString = @"Server=TEC-K-PC07; Database= Spotify; Trusted_Connection=True;";
+            services.AddDbContext<PlayerContext>(g => g.UseSqlServer(connectionString));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
