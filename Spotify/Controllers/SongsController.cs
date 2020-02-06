@@ -23,15 +23,38 @@ namespace Spotify.Controllers
 
         // GET: api/Songs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Songs>>> GetSongs()
+        /*public async Task<ActionResult<IEnumerable<Songs>>> GetSongs()
         {
             return await _context.Songs.ToListAsync();
+        }*/
+        /*public IEnumerable<Songs> Get()
+        {
+            //return _context.Songs.OrderByDescending(p => p.ID);
+            return IEnumerable.Range
+            {
+                new {id =1, Name="Svinninge"}, // dette er et anonymt objekt (klasse)
+                new {id =2, Name="S"},
+                new {id =3, Name="inge"},
+            });
+        }*/
+        public JsonResult GetSongs()
+        {
+            return new JsonResult(new List<object>()
+            {
+                new {id =1, Name="Svinninge"}, // dette er et anonymt objekt (klasse)
+                new {id =2, Name="S"},
+                new {id =3, Name="inge"},
+            });
         }
 
         // GET: api/Songs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Songs>> GetSongs(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var songs = await _context.Songs.FindAsync(id);
 
             if (songs == null)

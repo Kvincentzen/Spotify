@@ -9,7 +9,7 @@ export class HomeComponent {
     public songs: Songs[];
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-        http.get<Songs[]>(baseUrl + 'songs').subscribe(result => {
+        http.get<Songs[]>(baseUrl + 'song').subscribe(result => {
             this.songs = result;
         }, error => console.error(error));
     }
