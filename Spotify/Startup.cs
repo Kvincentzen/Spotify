@@ -26,10 +26,10 @@ namespace Spotify
             services.AddDbContext<PlayerContext>(g => g.UseSqlServer(connectionString));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+            /*services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
-            });
+            });*/
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -62,7 +62,7 @@ namespace Spotify
             });*/
                 app.UseHttpsRedirection();
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
+            /*if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
@@ -87,7 +87,7 @@ namespace Spotify
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });
+            });*/
         }
     }
 }

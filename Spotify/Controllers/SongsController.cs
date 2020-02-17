@@ -23,7 +23,26 @@ namespace Spotify.Controllers
 
         // GET: api/Songs
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<Songs>>> GetSongs()
+        public IActionResult GetSongs ()
+        {
+            IList<Songs> songs = null;
+            using (_context)
+            {
+                songs = _context.Songs.Select(s => new Songs()
+                {
+                    ID = s.ID,
+                    Title = s.Title,
+                    TrackId = s.TrackId,
+                    Artists = s.Artists
+                }).ToList<Songs>();
+            }
+            if (songs.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(songs);
+        }
+       /*public async Task<ActionResult<IEnumerable<Songs>>> GetSongs()
         {
             return await _context.Songs.ToListAsync();
         }*/
@@ -37,7 +56,7 @@ namespace Spotify.Controllers
                 new {id =3, Name="inge"},
             });
         }*/
-        public JsonResult GetSongs()
+        /*public JsonResult GetSongs()
         {
             return new JsonResult(new List<object>()
             {
@@ -45,7 +64,7 @@ namespace Spotify.Controllers
                 new {id =2, Name="S"},
                 new {id =3, Name="inge"},
             });
-        }
+        }*/
 
         // GET: api/Songs/5
         [HttpGet("{id}")]
